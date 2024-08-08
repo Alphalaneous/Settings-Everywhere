@@ -86,7 +86,7 @@ class $modify(MyLevelInfoLayer, LevelInfoLayer) {
 		button->m_duration = 0.2f;
 		button->m_unselectedDuration = 0.2f;
 		button->setID("main-options"_spr);
-		button->setPosition({-45, 0});
+		button->setPosition({-345, 0});
 
 		if(CCNode* settingsMenu = getChildByID("garage-menu")){
 			settingsMenu->addChild(button);
