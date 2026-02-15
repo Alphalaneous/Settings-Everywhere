@@ -4,8 +4,8 @@
 #include <Geode/modify/GJDropDownLayer.hpp>
 #include <Geode/modify/EditorPauseLayer.hpp>
 #include <Geode/modify/EditLevelLayer.hpp>
-#include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
-#include <alphalaneous.alphas_geode_utils/include/Utils.h>
+#include <alphalaneous.alphas_geode_utils/include/ObjectModify.hpp>
+#include <alphalaneous.alphas_geode_utils/include/Utils.hpp>
 
 using namespace geode::prelude;
 
@@ -26,7 +26,7 @@ class $modify(MyGJDropDownLayer, GJDropDownLayer){
     void showLayer(bool p0) {
         
         GJDropDownLayer::showLayer(p0);
-        if(m_fields->m_onScene){
+        if (m_fields->m_onScene){
             CCScene* currentScene = CCDirector::get()->getRunningScene();
             removeFromParentAndCleanup(false);
             currentScene->addChild(this);
@@ -163,13 +163,13 @@ class $modify(MyEditLevelLayer, EditLevelLayer) {
 class $nodeModify(MyModSettingsPopup, ModSettingsPopup) {
 
 	void modify() {
-		auto layerOpt = AlphaUtils::Cocos::getLayerByClassName("ModPopup");
+		auto layerOpt = alpha::utils::cocos::getLayerByClassName("ModPopup");
 		if (!layerOpt.has_value()) return;
 
 		if (layerOpt.value()->getID() == "geode.loader/popup-alphalaneous.settings_everywhere") {
-			queueInMainThread([this] {
+			runAction(CallFuncExt::create([this] {
 				removeFromParent();
-			});
+			}));
 
         	showOptions();
 		}
